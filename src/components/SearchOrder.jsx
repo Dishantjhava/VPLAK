@@ -7,7 +7,7 @@ export default function SearchOrder({
   onSearchByChange,
   onQueryChange,
   initialSearchBy = 'name',
-  initialQuery = 'dummy',
+  initialQuery = '',
 }) {
   const [internalSearchBy, setInternalSearchBy] = useState(initialSearchBy);
   const [internalQuery, setInternalQuery] = useState(initialQuery);

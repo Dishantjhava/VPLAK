@@ -7,7 +7,7 @@ export default function App() {
   const [orders, setOrders] = useState([]);
   const [activeNav] = useState("Order's Panel");
   const [searchBy, setSearchBy] = useState('name');
-  const [query, setQuery] = useState('dummy');
+  const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
