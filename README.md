@@ -86,29 +86,50 @@ npm install
 Copy `.env.example` to `.env`:
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/vplak
+MONGO_URI=mongodb+srv://<username>:<password>@vplak.nrisjs9.mongodb.net/vplak?retryWrites=true&w=majority&appName=VPLAK
 ```
 
 ### 4. Seed the Database
-Populate MongoDB with the design's initial orders:
+Populate MongoDB (local or Atlas cloud) with the design's initial orders:
 ```bash
 npm run seed
 ```
 
 ### 5. Run the Application
+
+**Option A: Local Development (Hot Reloading)**
 In separate terminal tabs:
-
-**Start Backend Server:**
 ```bash
+# Terminal 1: Backend Server
 npm run server
-# Runs on http://localhost:5000
+
+# Terminal 2: Frontend Vite Dev Server
+npm run dev
 ```
 
-**Start Frontend Development Server:**
+**Option B: Production / Unified Single-Platform Mode**
+Both the React frontend and Express API run together from a single server and port:
 ```bash
-npm run dev
-# Runs on http://localhost:5173
+npm run build
+npm start
+# Visit http://localhost:5000
 ```
+
+---
+
+## 🌐 Single-Platform Cloud Deployment (Render / Railway)
+
+Both the frontend and backend are configured to deploy together on a **single platform** (e.g. [Render](https://render.com) or [Railway](https://railway.app)):
+
+1. Push your repository to GitHub.
+2. In your Render or Railway dashboard, create a **Web Service** from this repository.
+3. Configure:
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
+4. In Environment Variables, set:
+   - `MONGO_URI`: your MongoDB Atlas connection string.
+   - `PORT`: `5000` (or leave default provided by the platform).
+5. The platform will build the React frontend and serve both the UI and REST API on a single public URL.
 
 ---
 
