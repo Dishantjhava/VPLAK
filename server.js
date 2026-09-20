@@ -59,6 +59,9 @@ async function startServer() {
   }
 }
 
-startServer();
+// Start server locally or in standard container environment (Render/Railway/local)
+if (!process.env.VERCEL) {
+  startServer();
+}
 
 export default app;
