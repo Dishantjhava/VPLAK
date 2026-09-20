@@ -22,6 +22,29 @@ export class OrderController {
     // Explicit method binding to preserve 'this' context when passed to Express route handlers
     this.searchOrders = this.searchOrders.bind(this);
     this.getAllOrders = this.getAllOrders.bind(this);
+    this.createOrder = this.createOrder.bind(this);
+  }
+
+  /**
+   * HTTP Handler for POST /api/orders
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
+  async createOrder(req, res) {
+    try {
+      const orderData = req.body;
+      const data = await this.orderService.createOrder(orderData);
+
+      return res.status(201).json({
+        success: true,
+        data,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message || 'Error occurred while creating order',
+      });
+    }
   }
 
   /**

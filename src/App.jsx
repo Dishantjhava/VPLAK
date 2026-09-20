@@ -15,8 +15,9 @@ export default function App() {
     try {
       setLoading(true);
       setError(null);
+      const normalizedType = (type || 'name').trim().toLowerCase();
       const res = await fetch(
-        `/api/orders/search?type=${encodeURIComponent(type)}&value=${encodeURIComponent(value ?? '')}`
+        `/api/orders/search?type=${encodeURIComponent(normalizedType)}&value=${encodeURIComponent(value ?? '')}`
       );
       const result = await res.json();
       if (result.success) {

@@ -71,6 +71,17 @@ export class OrderRepository {
   }
 
   /**
+   * Creates and persists a new order document in MongoDB
+   * @param {Object} orderData
+   * @returns {Promise<Object>}
+   */
+  async create(orderData) {
+    const order = new this.model(orderData);
+    const saved = await order.save();
+    return saved.toObject();
+  }
+
+  /**
    * Counts total documents (data access utility)
    * @returns {Promise<number>}
    */

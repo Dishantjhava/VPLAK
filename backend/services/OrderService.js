@@ -62,6 +62,38 @@ export class OrderService {
   }
 
   /**
+   * Validates and creates a new order
+   * @param {Object} orderData
+   * @returns {Promise<Object>}
+   * @throws {Error} If any required field is missing
+   */
+  async createOrder(orderData) {
+    if (!orderData || typeof orderData !== 'object') {
+      throw new Error('Order data is required');
+    }
+
+    const { orderId, buyer, product, total } = orderData;
+
+    if (!orderId || typeof orderId !== 'string' || !orderId.trim()) {
+      throw new Error('Field "orderId" is required');
+    }
+
+    if (!buyer || typeof buyer !== 'object' || !buyer.name || !buyer.name.trim()) {
+      throw new Error('Field "buyer" with at least "name" is required');
+    }
+
+    if (!product || typeof product !== 'object' || (!product.title && !product.name)) {
+      throw new Error('Field "product" with "title" or "name" is required');
+    }
+
+    if (total === undefined || total === null || total.toString().trim() === '') {
+      throw new Error('Field "total" is required');
+    }
+
+    return await this.orderRepository.create(orderData);
+  }
+
+  /**
    * Retrieves all orders
    * @returns {Promise<Array>}
    */

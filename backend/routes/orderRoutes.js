@@ -12,6 +12,9 @@ export function createOrderRouter(controller = new OrderController()) {
   // Search orders route: GET /api/orders/search?type=name&value=dummy
   router.get('/search', controller.searchOrders);
 
+  // Create order route: POST /api/orders
+  router.post('/', controller.createOrder);
+
   // Default list route: GET /api/orders
   router.get('/', controller.getAllOrders);
 

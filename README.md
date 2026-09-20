@@ -58,8 +58,6 @@ VPLAK/
 │   │   ├── Navbar.jsx              # Main header & navigation bar
 │   │   ├── OrderCard.jsx           # Order details card with specs & actions
 │   │   └── SearchOrder.jsx         # Search filter fieldset & glossy button
-│   ├── data/
-│   │   └── mockOrders.js           # Reference mock data
 │   ├── App.jsx                     # Main application linking UI to backend API
 │   ├── index.css                   # Custom vintage layout classes & Tailwind
 │   └── main.jsx                    # React root render

@@ -61,7 +61,7 @@ const OrderSchema = new mongoose.Schema(
 );
 
 // Fallback: ensure title and name are synchronized for frontend compatibility
-OrderSchema.pre('save', function (next) {
+OrderSchema.pre('save', function () {
   if (this.product) {
     if (!this.product.name && this.product.title) {
       this.product.name = this.product.title;
@@ -70,7 +70,6 @@ OrderSchema.pre('save', function (next) {
       this.product.title = this.product.name;
     }
   }
-  next();
 });
 
 const Order = mongoose.model('Order', OrderSchema);
