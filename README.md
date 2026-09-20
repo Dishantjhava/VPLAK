@@ -1,6 +1,13 @@
 # VPLAK Search Order Admin Panel
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-vplak.vercel.app-success?style=for-the-badge&logo=vercel)](https://vplak.vercel.app)
+[![MongoDB Atlas](https://img.shields.io/badge/Database-MongoDB%20Atlas-green?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/atlas)
+
 A full-stack order management and search portal designed in Google Stitch and developed with **React + Vite + Tailwind CSS** on the frontend, and a strongly architected **Node.js + Express + MongoDB (Mongoose)** backend demonstrating core **Object-Oriented Programming (OOP)** principles.
+
+- **🌐 Live Production Deployment**: [https://vplak.vercel.app](https://vplak.vercel.app)
+- **📡 Live Production Search API**: [https://vplak.vercel.app/api/orders/search](https://vplak.vercel.app/api/orders/search)
+- **❤️ Live Production Health API**: [https://vplak.vercel.app/api/health](https://vplak.vercel.app/api/health)
 
 ---
 

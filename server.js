@@ -15,7 +15,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/vplak';
+const MONGO_URI =
+  process.env.MONGO_URI ||
+  'mongodb+srv://dishantjava06690_db_user:99Iksg52tqVsYtwy@vplak.nrisjs9.mongodb.net/vplak?retryWrites=true&w=majority&appName=VPLAK';
 
 // Middleware
 app.use(cors());
