@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import SearchOrder from './components/SearchOrder';
 import OrderCard from './components/OrderCard';
@@ -11,34 +11,46 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchOrders = useCallback(async (type, value) => {
-    try {
+  // Synchronize orders with backend search API on filter/input change
+  useEffect(() => {
+    let isCancelled = false;
+
+    async function fetchOrders() {
       setLoading(true);
       setError(null);
-      const normalizedType = (type || 'name').trim().toLowerCase();
-      const res = await fetch(
-        `/api/orders/search?type=${encodeURIComponent(normalizedType)}&value=${encodeURIComponent(value ?? '')}`
-      );
-      const result = await res.json();
-      if (result.success) {
-        setOrders(result.data || []);
-      } else {
-        setError(result.message || 'Failed to fetch orders');
-        setOrders([]);
-      }
-    } catch (err) {
-      console.error('Error fetching orders:', err);
-      setError(err.message);
-      setOrders([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      try {
+        const normalizedType = (searchBy || 'name').trim().toLowerCase();
+        const res = await fetch(
+          `/api/orders/search?type=${encodeURIComponent(normalizedType)}&value=${encodeURIComponent(query ?? '')}`
+        );
+        const result = await res.json();
 
-  // Fetch whenever radio selection or search input changes
-  useEffect(() => {
-    fetchOrders(searchBy, query);
-  }, [searchBy, query, fetchOrders]);
+        if (!isCancelled) {
+          if (result.success) {
+            setOrders(result.data || []);
+          } else {
+            setError(result.message || 'Failed to fetch orders');
+            setOrders([]);
+          }
+        }
+      } catch (err) {
+        if (!isCancelled) {
+          setError(err.message);
+          setOrders([]);
+        }
+      } finally {
+        if (!isCancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchOrders();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [searchBy, query]);
 
   const handleSearch = ({ searchBy: newSearchBy, query: newQuery }) => {
     setSearchBy(newSearchBy);
@@ -59,21 +71,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-[Arial,Helvetica,sans-serif] bg-[#005c53]">
-      {/* BEGIN: MainHeader */}
+      {/* Main Header */}
       <Navbar
         activeItem={activeNav}
         onLogout={handleLogout}
       />
-      {/* END: MainHeader */}
 
-      {/* BEGIN: MainContent */}
+      {/* Main Content */}
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-5 flex flex-col items-center">
         {/* Page Title */}
         <h1 className="text-base font-black tracking-wide text-black mb-4 uppercase">
           Search Order
         </h1>
 
-        {/* BEGIN: SearchFormSection */}
+        {/* Search Form Section */}
         <SearchOrder
           searchBy={searchBy}
           query={query}
@@ -81,9 +92,8 @@ export default function App() {
           onQueryChange={setQuery}
           onSearch={handleSearch}
         />
-        {/* END: SearchFormSection */}
 
-        {/* BEGIN: OrderResultsList */}
+        {/* Order Results List */}
         <section
           className="w-full max-w-3xl flex flex-col space-y-4"
           data-purpose="order-card-list"
@@ -103,9 +113,7 @@ export default function App() {
             </div>
           )}
         </section>
-        {/* END: OrderResultsList */}
       </main>
-      {/* END: MainContent */}
     </div>
   );
 }
