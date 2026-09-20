@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #005c53;
+  margin: 0;
+  padding: 0;
+  color: #111827;
+}
+
+/* Search Bar Outer Container Styling */
+.search-pill-container {
+  background-color: #ffffff;
+  border-radius: 9999px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-fieldset {
+  border: 1px solid #c5c5c5;
+  border-radius: 9999px;
+  padding: 6px 16px 8px 18px;
+}
+
+.search-fieldset legend {
+  color: #6b7280;
+  font-size: 13px;
+  padding: 0 6px;
+  margin-left: 12px;
+  float: none;
+  width: auto;
+}
+
+/* Glossy Green Search Button */
+.btn-search-glossy {
+  background: linear-gradient(to bottom, #2bd424 0%, #159b0f 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  border: 1px solid #14800e;
+}
+
+.btn-search-glossy:hover {
+  background: linear-gradient(to bottom, #34e02d 0%, #17a811 100%);
+}
+
+/* Orange Badges */
+.badge-orange {
+  background-color: #f99525;
+  color: #ffffff;
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Track Button */
+.btn-track {
+  background-color: #707070;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.btn-track:hover {
+  background-color: #555555;
+}
+
+/* Standard Classic Blue Link */
+.link-blue {
+  color: #0b45c2;
+  text-decoration: none;
+}
+.link-blue:hover {
+  text-decoration: underline;
+}
