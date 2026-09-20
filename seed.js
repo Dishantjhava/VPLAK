@@ -4,9 +4,7 @@ import Order from './backend/models/Order.js';
 
 dotenv.config();
 
-const MONGO_URI =
-  process.env.MONGO_URI ||
-  'mongodb+srv://dishantjava06690_db_user:99Iksg52tqVsYtwy@vplak.nrisjs9.mongodb.net/vplak?retryWrites=true&w=majority&appName=VPLAK';
+const MONGO_URI = process.env.MONGO_URI;
 
 const initialSeedOrders = [
   {
